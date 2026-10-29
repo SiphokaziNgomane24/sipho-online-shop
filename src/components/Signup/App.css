@@ -1,0 +1,16 @@
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  font-family: Arial, sans-serif;
+  background: #f5f0eb;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.hero .tagline {
+  letter-spacing: 3px;
+  color: #666;
+}
