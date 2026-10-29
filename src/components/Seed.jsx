@@ -1,0 +1,1 @@
+await addDoc(collection(db, "products"), { name, price, category, description, imageURL });
