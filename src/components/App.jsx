@@ -1,23 +1,25 @@
-import "./style.css";
 import { Link } from "react-router-dom";
-import Nav from "./Nav.jsx";
+import Layout from "./Layout.jsx";
 
 function App() {
   return (
-    <>
-      <Nav />
-      <div className="hero">
-        <h1>Sipho THREADS SHOP</h1>
-        <p className="tagline">YOUR STYLE, YOUR PERSONALITY</p>
-        <p>WELCOME TO OUR SHOP FOR NOTHING BUT FASHION!</p>
-        <Link to="/shop">
-          <button type="button">Shop Now</button>
-        </Link>
-        <Link to="/signup">
-          <button type="button">Sign Up Now</button>
-        </Link>
-      </div>
-    </>
+    <Layout>
+      <section className="hero">
+        <div className="hero-panel">
+          <p className="eyebrow">Your style, your personality</p>
+          <h1>Sipho THREADS</h1>
+          <p>Welcome to a shop for nothing but fashion. Streetwear made for everyday style.</p>
+          <div className="hero-actions">
+            <Link to="/shop" className="btn btn-primary">
+              Shop now
+            </Link>
+            <Link to="/signup" className="btn btn-secondary">
+              Sign up
+            </Link>
+          </div>
+        </div>
+      </section>
+    </Layout>
   );
 }
 

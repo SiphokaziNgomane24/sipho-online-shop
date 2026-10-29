@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase.js";
-import Nav from "../Nav.jsx";
+import Layout from "../Layout.jsx";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -45,34 +45,35 @@ export default function Signup() {
   };
 
   return (
-    <>
-      <Nav />
-      <main className="auth-container">
-        <h1>Sipho THREADS</h1>
-        <h2>Create Account</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Name</label>
-          <input id="name" name="name" type="text" required />
-          <label htmlFor="email">Email</label>
-          <input id="email" name="email" type="email" required />
-          <label htmlFor="password">Password</label>
-          <input id="password" name="password" type="password" required />
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            required
-          />
-          <button type="submit" disabled={loading}>
-            {loading ? "Creating account..." : "Sign Up"}
-          </button>
-          {error && <p>{error}</p>}
-        </form>
-        <p>
-          Already have an account? <Link to="/login">Login</Link>
-        </p>
+    <Layout>
+      <main className="auth-wrap">
+        <section className="auth-card">
+          <h1>Sipho THREADS</h1>
+          <h2>Create your account</h2>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="name">Name</label>
+            <input id="name" name="name" type="text" required />
+            <label htmlFor="email">Email</label>
+            <input id="email" name="email" type="email" required />
+            <label htmlFor="password">Password</label>
+            <input id="password" name="password" type="password" required />
+            <label htmlFor="confirmPassword">Confirm password</label>
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              required
+            />
+            <button type="submit" className="btn btn-primary" disabled={loading}>
+              {loading ? "Creating account..." : "Sign up"}
+            </button>
+            {error && <p className="error">{error}</p>}
+          </form>
+          <p className="switch">
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+        </section>
       </main>
-    </>
+    </Layout>
   );
 }

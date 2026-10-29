@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase.js";
-import Nav from "../Nav.jsx";
+import Layout from "../Layout.jsx";
 
 export default function Shop() {
   const navigate = useNavigate();
@@ -46,38 +46,52 @@ export default function Shop() {
   };
 
   return (
-    <>
-      <Nav />
-      <main>
-        <h1>Shop</h1>
-        <select
-          id="category-filter"
-          value={category}
-          onChange={(event) => setCategory(event.target.value)}
-        >
-          <option value="All">All</option>
-          <option value="Hoodies">Hoodies</option>
-          <option value="T-shirts">T-shirts</option>
-          <option value="Sneakers">Sneakers</option>
-          <option value="Accessories">Accessories</option>
-        </select>
-        {message && <p>{message}</p>}
-        <section id="product-grid">
+    <Layout>
+      <main className="page">
+        <div className="page-header">
+          <h1 className="page-heading">Shop</h1>
+          <div className="shop-toolbar">
+            <select
+              id="category-filter"
+              value={category}
+              onChange={(event) => setCategory(event.target.value)}
+            >
+              <option value="All">All</option>
+              <option value="Hoodies">Hoodies</option>
+              <option value="T-shirts">T-shirts</option>
+              <option value="Sneakers">Sneakers</option>
+              <option value="Accessories">Accessories</option>
+            </select>
+          </div>
+        </div>
+        {message && <p className="notice">{message}</p>}
+        <section className="product-grid">
+          {visibleProducts.length === 0 && (
+            <div className="empty-state">
+              <p>No pieces in this collection yet. Check back soon.</p>
+            </div>
+          )}
           {visibleProducts.map((product) => (
             <article className="product-card" key={product.id}>
               {product.imageURL && (
                 <img src={product.imageURL} alt={product.name} />
               )}
-              <h2>{product.name}</h2>
-              <p>{product.description}</p>
-              <p>R{Number(product.price).toFixed(2)}</p>
-              <button type="button" onClick={() => addToCart(product.id)}>
-                Add to Cart
+              <div className="product-card-body">
+                <h2>{product.name}</h2>
+                <p>{product.description}</p>
+                <p className="price">R{Number(product.price).toFixed(2)}</p>
+              </div>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => addToCart(product.id)}
+              >
+                Add to cart
               </button>
             </article>
           ))}
         </section>
       </main>
-    </>
+    </Layout>
   );
 }
