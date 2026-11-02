@@ -8,6 +8,7 @@ import Signup from "./components/Signup/Signup.jsx";
 import Login from "./components/Login/Login.jsx";
 import Cart from "./components/Cart/Cart.jsx";
 import Shop from "./components/shop/Shop.jsx";
+import Checkout from "./components/Checkout/Checkout.jsx";
 import Auth from "./components/Auth.jsx";
 
 createRoot(document.getElementById("root")).render(
@@ -19,7 +20,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/checkout" element={<Shop />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/auth" element={<Auth />} />
       </Routes>
     </BrowserRouter>
