@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import { auth, db } from "../firebase.js";
-import Nav from "../Nav.jsx";
+import Layout from "../Layout.jsx";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -55,30 +55,43 @@ export default function Cart() {
   };
 
   return (
-    <>
-      <Nav />
-      <main>
-        <h1>Your Cart</h1>
-        <section id="cart-items">
-          {items.length === 0 && <p>Your cart is empty.</p>}
+    <Layout>
+      <main className="page">
+        <div className="page-header">
+          <h1 className="page-heading">Your cart</h1>
+        </div>
+        <section className="cart-list">
+          {items.length === 0 && (
+            <div className="empty-state">
+              <p>Your cart is empty.</p>
+            </div>
+          )}
           {items.map((item) => (
-            <article key={item.id}>
-              <h2>{item.name}</h2>
-              <p>Quantity: {item.quantity}</p>
-              <p>R{item.lineTotal.toFixed(2)}</p>
-              <button type="button" onClick={() => removeItem(item.id)}>
+            <article className="cart-card" key={item.id}>
+              <div>
+                <h2>{item.name}</h2>
+                <p>Quantity: {item.quantity}</p>
+                <p className="price">R{item.lineTotal.toFixed(2)}</p>
+              </div>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => removeItem(item.id)}
+              >
                 Remove
               </button>
             </article>
           ))}
         </section>
-        <h2>
-          Total: R<span id="cart-total">{total.toFixed(2)}</span>
-        </h2>
-        <button type="button" id="checkout-button">
-          Checkout
-        </button>
+        <div className="cart-summary">
+          <h2>
+            Total: R<span id="cart-total">{total.toFixed(2)}</span>
+          </h2>
+          <button type="button" id="checkout-button" className="btn btn-primary">
+            Checkout
+          </button>
+        </div>
       </main>
-    </>
+    </Layout>
   );
 }
